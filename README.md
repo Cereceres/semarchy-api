@@ -1,5 +1,5 @@
 # semarchy-api
-semarchy client for nodejs
+semarchy client for nodejs, look in [semarchy](https://www.semarchy.com/doc/semarchy-xdm/semig.html#consuming-data-using-the-rest-api) for documentation 
 
 # usage
 
