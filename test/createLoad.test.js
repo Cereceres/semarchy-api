@@ -1,4 +1,6 @@
 const assert = require('assert');
+const url = require('url');
+
 
 const proxyquire = require('proxyquire');
 
@@ -19,6 +21,13 @@ const stub = {
             loadDescription
         }
     }) => {
+        const [ , semarchy, api, rest, loads, dataLocation ] = url
+            .parse(uri).path.split('/');
+        assert(semarchy === 'semarchy');
+        assert(api === 'api');
+        assert(rest === 'rest');
+        assert(loads === 'loads');
+        assert(dataLocation === 'test');
         assert(user);
         assert(uri);
         assert(pass);
@@ -29,7 +38,7 @@ const stub = {
         return Promise.resolve({
             loadId: 227,
             loadStatus: 'RUNNING',
-            loadCreator: 'jcereceres',
+            loadCreator: 'test',
             loadCreationDate: '2018-01-24T03:32:05.610Z',
             programName: 'curl',
             loadDescription: 'Load testing',
@@ -45,12 +54,12 @@ const { HOST:host, PASS:pass, USER:user } = process.env;
 
 const sem = new Semarchy(host, user, pass);
 
-describe('test to Semarchy-api', () => {
+describe('test to createLoad', () => {
     it('should call and create the load', async() => {
         const data = await sem.createLoad({
             programName: 'curl',
             loadDescription: 'Load testing',
-            dataLocation:'DemoEdenred'
+            dataLocation:'test'
         });
         const {
             loadId,
@@ -63,6 +72,7 @@ describe('test to Semarchy-api', () => {
             submitInterval,
             submittable
         } = data;
+        assert(sem.load.loadId === loadId);
         assert(loadId === 227);
         assert(loadStatus === 'RUNNING');
         assert(loadCreator);
