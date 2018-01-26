@@ -1,0 +1,31 @@
+{
+  "name": "semarchy-api",
+  "version": "0.0.1",
+  "description": "semarchy api",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cereceres/semarchy-api.git"
+  },
+  "keywords": [
+    "semarchy",
+    "api",
+    "rest",
+    "data"
+  ],
+  "author": "Jesus Cereceres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cereceres/semarchy-api/issues"
+  },
+  "homepage": "https://github.com/Cereceres/semarchy-api#readme",
+  "dependencies": {
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "proxyquire": "^1.8.0"
+  }
+}
