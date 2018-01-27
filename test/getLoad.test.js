@@ -48,12 +48,17 @@ const stub = {
 };
 const Semarchy = proxyquire('../index', stub);
 
-const { HOST:host, PASS:pass, USER:user } = process.env;
-
-const sem = new Semarchy(host, user, pass);
-
 describe('test to getLoad', () => {
+    beforeEach(() => {
+        process.env = Object.assign(process.env, {
+            SEMARCHY_HOST:'test',
+            SEMARCHY_USER:'test',
+            SEMARCHY_PASS: 'test'
+        });
+    });
     it('should call and get the load', async() => {
+        const sem = new Semarchy();
+
         sem.loadId = 1;
         const {
             loadId,
@@ -93,9 +98,11 @@ describe('test to getLoad', () => {
     });
 
     it('should catch credentials from enviroment vars', () => {
-        const _sem = new Semarchy();
-        assert(_sem.host === process.env.HOST);
-        assert(_sem.user === process.env.USER);
-        assert(_sem.pass === process.env.PASS);
+        const Sem = require('../index');
+        const _sem = new Sem();
+
+        assert(_sem.host === process.env.SEMARCHY_HOST);
+        assert(_sem.user === process.env.SEMARCHY_USER);
+        assert(_sem.pass === process.env.SEMARCHY_PASS);
     });
 });

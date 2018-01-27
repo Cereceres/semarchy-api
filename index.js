@@ -1,12 +1,17 @@
 const get = require('./lib/get');
 const post = require('./lib/post');
-const { HOST, USER, PASS } = process.env;
+const getConfig = require('./lib/get-config');
+
+const errorMessage = 'Config is wrong';
+const errorWrongConfig = new Error(errorMessage);
 module.exports = class {
-    constructor(host = HOST, user = USER, pass = PASS) {
-        if (!host || !user || !pass) throw new Error('Config is wrong');
-        this.host = host;
-        this.user = user;
-        this.pass = pass;
+    constructor(host, user, pass) {
+        const { semHost, semPass, semUser } = getConfig();
+        this.host = host || semHost;
+        this.user = user || semUser;
+        this.pass = pass || semPass;
+
+        if (!this.host || !this.user || !this.pass) throw errorWrongConfig;
         this.load = {};
     }
     createLoad({ programName, loadDescription = '', dataLocation }) {

@@ -1,6 +1,6 @@
 {
   "name": "semarchy-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "semarchy api",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Cereceres/semarchy-api#readme",
   "dependencies": {
+    "rc": "^1.2.4",
     "request": "^2.83.0"
   },
   "devDependencies": {

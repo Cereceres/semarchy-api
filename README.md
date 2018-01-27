@@ -8,7 +8,10 @@ const host = process.env.HOST
 const user = process.env.USER
 const pass = process.env.PASS
 const Semarchy = require('semarchy-api')
-const sem = Semarchy(host, user, pass)
+const sem = Semarchy(host, user, pass)// or only Semarchy()
+// and try to get the credentials from 
+// SEMARCHY_HOST SEMARCHY_USER and SEMARCHY_PASS
+// or you can create in your root path .semarchyrc file to get config
 async()=>{
     const {
             loadId,
@@ -43,6 +46,7 @@ async()=>{
 # API
 
 # Class Semarchy(host=process.env.HOST, user=process.env.USER, pass=process.env.PASS)
+You can create .semarchyrc with pass, user and host property objects to get config from there.
 
 # Methods
 

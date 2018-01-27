@@ -47,12 +47,18 @@ const stub = {
 };
 const Semarchy = proxyquire('../index', stub);
 
-const { HOST:host, PASS:pass, USER:user } = process.env;
-
-const sem = new Semarchy(host, user, pass);
 
 describe('test to cancelledLoad', () => {
+    before(() => {
+        Object.assign(process.env, {
+            SEMARCHY_HOST:'test',
+            SEMARCHY_USER:'test',
+            SEMARCHY_PASS: 'test'
+        });
+    });
     it('should call and cancel the load', async() => {
+        const sem = new Semarchy();
+
         sem.loadId = 1;
         const {
             loadId,

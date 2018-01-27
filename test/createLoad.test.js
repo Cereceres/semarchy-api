@@ -50,12 +50,18 @@ const stub = {
 };
 const Semarchy = proxyquire('../index', stub);
 
-const { HOST:host, PASS:pass, USER:user } = process.env;
-
-const sem = new Semarchy(host, user, pass);
 
 describe('test to createLoad', () => {
+    before(() => {
+        Object.assign(process.env, {
+            SEMARCHY_HOST:'test',
+            SEMARCHY_USER:'test',
+            SEMARCHY_PASS: 'test'
+        });
+    });
     it('should call and create the load', async() => {
+        const sem = new Semarchy();
+
         const data = await sem.createLoad({
             programName: 'curl',
             loadDescription: 'Load testing',
